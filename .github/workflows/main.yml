@@ -17,4 +17,4 @@ jobs:
           # The webhook url for your Incoming Webhook connector
           webhook: https://outlook.office.com/webhook/4b570c11-ec8f-448f-84ed-25aeedf1bcba@cbfb05eb-2f3f-4750-b5c4-c40193ad3f29/IncomingWebhook/5e61192850284bd4b1a7fe9932dea8f1/44658bef-5d3e-4202-82f0-917ad125c4ce
           # The message you want to send to your Microsoft Teams channel
-          message:  ${{ toJson({"Repository":github.repository", "Actor":github.actor,"Commit Message":github.event.commits.head.message}) }}
+          message:  ${{ fromJson({"Repository":github.repository", "Actor":github.actor,"Commit Message":github.event.commits.head.message}) }}
