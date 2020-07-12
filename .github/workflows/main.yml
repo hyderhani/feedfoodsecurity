@@ -1,0 +1,20 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on: [push,pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  notify:
+     runs-on: ubuntu-latest
+     steps:
+      - name: Microsoft Teams Webhook Notifications
+        uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
+        with:
+          # The webhook url for your Incoming Webhook connector
+          webhook: https://outlook.office.com/webhook/4b570c11-ec8f-448f-84ed-25aeedf1bcba@cbfb05eb-2f3f-4750-b5c4-c40193ad3f29/IncomingWebhook/5e61192850284bd4b1a7fe9932dea8f1/44658bef-5d3e-4202-82f0-917ad125c4ce
+          # The message you want to send to your Microsoft Teams channel
+          message:  Test
