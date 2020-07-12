@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.sun.media.sound.InvalidDataException;
 
@@ -24,14 +25,15 @@ public class SecurityController {
 	}
 
 	@PostMapping("/sign-up")
-	public ResponseEntity signUp(@RequestBody User user) {
+	public ResponseEntity<User> signUp(@RequestBody User user) {
 		try
 		{
 		User response = securityService.signUp(user);
 		return new ResponseEntity<User>(response, HttpStatus.OK);
 		}
-		catch (InvalidDataException e) {
-			return new ResponseEntity<String>("Invalid Data", HttpStatus.BAD_REQUEST);
+		catch (InvalidDataException exc) {
+			throw new ResponseStatusException(
+			           HttpStatus.BAD_REQUEST, "Invalid Data");
 		}
 	}
 	
