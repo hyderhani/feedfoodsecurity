@@ -3,7 +3,7 @@ package org.hani.feedfood.security.models;
 public class User {
 String Name;
 String email;
-String password;
+private String password;
 
 public String getName() {
 	return Name;
