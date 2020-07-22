@@ -11,9 +11,4 @@ public class FeedFoodSecurity {
 	public static void main(String[] args) {
 		SpringApplication.run(FeedFoodSecurity.class, args);
 	}
-
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 }

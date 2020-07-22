@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.hani.feedfood.security.models.SignUpUser;
+import org.hani.feedfood.security.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -48,7 +49,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 
 //generate token for user
-	public String generateToken(SignUpUser userDetails) {
+	public String generateToken(User userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getEmail());
 	}

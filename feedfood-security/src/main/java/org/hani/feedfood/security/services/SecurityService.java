@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.hani.feedfood.security.models.JwtResponse;
 import org.hani.feedfood.security.models.SignUpUser;
+import org.hani.feedfood.security.models.User;
 import org.hani.feedfood.security.util.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,12 +60,25 @@ public class SecurityService implements ISecurityService {
 
 	private void authenticate(String username, String password) throws Exception {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			UsernamePasswordAuthenticationToken token= new UsernamePasswordAuthenticationToken(username, password);
+			authenticationManager.authenticate(token);
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
+	}
+
+	@Override
+	public JwtResponse login(User user) throws Exception {
+	try {
+		authenticate(user.getEmail(), user.getPassword());
+		final String token = jwtTokenUtil.generateToken(user);
+		return new JwtResponse(token);
+	}
+	catch (Exception e) {
+		throw e;
+	}
 	}
 
 }
