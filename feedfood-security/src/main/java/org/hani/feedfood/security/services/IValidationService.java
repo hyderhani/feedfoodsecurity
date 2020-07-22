@@ -1,7 +1,7 @@
 package org.hani.feedfood.security.services;
 
-import org.hani.feedfood.security.models.User;
+import org.hani.feedfood.security.models.SignUpUser;
 
 public interface IValidationService {
-	boolean validateSignUpData(User user);
+	boolean validateSignUpData(SignUpUser user);
 }

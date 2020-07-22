@@ -3,7 +3,7 @@ package org.hani.feedfood.security.services;
 import java.util.ArrayList;
 
 import org.hani.feedfood.security.models.JwtResponse;
-import org.hani.feedfood.security.models.User;
+import org.hani.feedfood.security.models.SignUpUser;
 import org.hani.feedfood.security.util.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,7 +34,7 @@ public class SecurityService implements ISecurityService {
 		this.validationService = validationService;
 	}
 
-	public JwtResponse signUp(User user) throws InvalidDataException {
+	public JwtResponse signUp(SignUpUser user) throws InvalidDataException {
 
 		if (validationService.validateSignUpData(user)) {
 			String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());

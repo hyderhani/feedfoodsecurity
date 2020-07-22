@@ -1,7 +1,7 @@
 package org.hani.feedfood.security.controllers;
 
 import org.hani.feedfood.security.models.JwtResponse;
-import org.hani.feedfood.security.models.User;
+import org.hani.feedfood.security.models.SignUpUser;
 import org.hani.feedfood.security.services.ISecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class SecurityController {
 	}
 
 	@PostMapping("/sign-up")
-	public ResponseEntity<JwtResponse> signUp(@RequestBody User user) {
+	public ResponseEntity<JwtResponse> signUp(@RequestBody SignUpUser user) {
 		try
 		{
 		JwtResponse response = securityService.signUp(user);
@@ -37,5 +37,16 @@ public class SecurityController {
 			           HttpStatus.BAD_REQUEST, "Invalid Data");
 		}
 	}
-	
+	@PostMapping("/login")
+	public ResponseEntity<JwtResponse> login(@RequestBody SignUpUser user) {
+		try
+		{
+		JwtResponse response = securityService.signUp(user);
+		return new ResponseEntity<JwtResponse>(response, HttpStatus.OK);
+		}
+		catch (InvalidDataException exc) {
+			throw new ResponseStatusException(
+			           HttpStatus.BAD_REQUEST, "Invalid Data");
+		}
+	}
 }
