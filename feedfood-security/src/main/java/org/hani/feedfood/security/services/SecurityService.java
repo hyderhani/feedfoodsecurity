@@ -58,14 +58,14 @@ public class SecurityService implements ISecurityService {
 		}
 	}
 
-	private void authenticate(String username, String password) throws Exception {
+	private void authenticate(String username, String password) throws Exception{
 		try {
 			UsernamePasswordAuthenticationToken token= new UsernamePasswordAuthenticationToken(username, password);
 			authenticationManager.authenticate(token);
 		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
+			throw new DisabledException("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
+			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
 		}
 	}
 

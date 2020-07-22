@@ -6,6 +6,8 @@ import org.hani.feedfood.security.models.User;
 import org.hani.feedfood.security.services.ISecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,14 @@ public class SecurityController {
 		{
 		JwtResponse response = securityService.login(user);
 		return new ResponseEntity<JwtResponse>(response, HttpStatus.OK);
+		}
+		catch (BadCredentialsException exc) {
+			throw new ResponseStatusException(
+			           HttpStatus.UNAUTHORIZED, exc.getMessage());
+		}
+		catch (DisabledException exc) {
+			throw new ResponseStatusException(
+			           HttpStatus.FORBIDDEN, exc.getMessage());
 		}
 		catch (Exception exc) {
 			throw new ResponseStatusException(
