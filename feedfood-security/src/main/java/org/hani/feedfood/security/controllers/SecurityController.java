@@ -60,4 +60,9 @@ public class SecurityController {
 			           HttpStatus.BAD_REQUEST, exc.getMessage());
 		}
 	}
+	@PostMapping("/logout")
+	public ResponseEntity<JwtResponse> logout() {
+		throw new ResponseStatusException(
+		           HttpStatus.NOT_IMPLEMENTED, "Not Implemented");
+	}
 }
